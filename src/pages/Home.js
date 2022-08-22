@@ -1,28 +1,36 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import SearchButton from "../components/SearchButton";
 import Bookshelf from "../components/Bookshelf";
-import { getAll } from "../pages/api/BooksAPI";
 import { bookActions } from "../store/BooksSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Home = (props) => {
   const booksDispatch = useDispatch();
-  const { books } = useSelector((state) => state.books);
+  const { readingBooks, wantBooks, finishedBooks, loading } = useSelector(
+    (state) => state.books
+  );
 
   useEffect(() => {
     async function loadData() {
-      booksDispatch(bookActions.getAll());
+      booksDispatch(bookActions.getBooks());
     }
     loadData();
-  }, []);
+  }, [booksDispatch]);
   return (
     <Fragment>
-      <div className="list-books">
-        <Bookshelf title="Currently Reading" books={books} />
-        <Bookshelf title="Want to Read" books={[]} />
-        <Bookshelf title="Read" books={[]} />
-        <SearchButton />
-      </div>
+      {!loading && (
+        <div className="list-books">
+          <Bookshelf
+            title="Currently Reading"
+            mode="list"
+            books={readingBooks}
+          />
+          <Bookshelf title="Want to Read" mode="list" books={wantBooks} />
+          <Bookshelf title="Read" mode="list" books={finishedBooks} />
+          <SearchButton />
+        </div>
+      )}
+      {loading && <p>Loading ...</p>}
     </Fragment>
   );
 };

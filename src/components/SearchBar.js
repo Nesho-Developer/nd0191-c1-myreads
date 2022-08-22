@@ -12,14 +12,18 @@ const SearchBar = (props) => {
     <Fragment>
       <div className={classes["search-books-bar"]}>
         <a
-          href="#"
+          href="/#"
           className={classes["close-search"]}
           onClick={onBackToHomeHandler}
         >
           Close
         </a>
         <div className={classes["search-books-input-wrapper"]}>
-          <input type="text" placeholder="Search by title, author, or ISBN" />
+          <input
+            type="text"
+            placeholder="Search by title, author, or ISBN"
+            onChange={props.onSearchInputChange}
+          />
         </div>
       </div>
     </Fragment>

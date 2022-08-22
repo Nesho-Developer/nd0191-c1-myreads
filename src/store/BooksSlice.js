@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import * as API from '../pages/api/BooksAPI'
-
+import { getAll, update } from "../pages/api/BooksAPI";
 
 // create slice
 
@@ -19,42 +18,70 @@ export const bookReducer = slice.reducer;
 
 function createInitialState() {
   return {
-    books: [],
-    loading : false,
-    error: ''
+    readingBooks: [],
+    wantBooks: [],
+    finishedBooks: [],
+    loading: false,
+    error: "",
   };
 }
 
 function createExtraActions() {
-
   return {
-    getAll: getAll(),
+    getBooks: getBooks(),
+    updateBooks: updateBooks(),
   };
 
-  function getAll() {
-    return createAsyncThunk(
-      `${name}/getAll`,
-      async () => await API.getAll()
+  function getBooks() {
+    return createAsyncThunk(`${name}/getBooks`, async () => await getAll());
+  }
+
+  function updateBooks() {
+    return createAsyncThunk(`${name}/updateBooks`, async ({ book, shelf }) =>
+      update(book, shelf)
     );
   }
 }
 
 function createExtraReducers() {
   return {
-    ...getAll(),
+    ...getBooks(),
+    ...updateBooks(),
   };
 
-  function getAll() {
-    var { pending, fulfilled, rejected } = extraActions.getAll;
+  function getBooks() {
+    var { pending, fulfilled, rejected } = extraActions.getBooks;
     return {
       [pending]: (state) => {
-        state.loading = { loading: true };
+        state.loading = true;
       },
       [fulfilled]: (state, action) => {
-        state.books = action.payload;
+        const books = action.payload;
+        state.readingBooks = books.filter(
+          (bo) => bo.shelf === "currentlyReading"
+        );
+        state.wantBooks = books.filter((bo) => bo.shelf === "wantToRead");
+        state.finishedBooks = books.filter((bo) => bo.shelf === "read");
+        state.loading = false;
       },
       [rejected]: (state, action) => {
-        state.error = { error: action.error };
+        state.error = action.error;
+        state.loading = false;
+      },
+    };
+  }
+  function updateBooks() {
+    var { pending, fulfilled, rejected } = extraActions.updateBooks;
+    return {
+      [pending]: (state) => {
+        state.loading = true;
+      },
+      [fulfilled]: (state, action) => {
+        state.loading = false;
+      },
+      [rejected]: (state, action) => {
+        state.error = action.error;
+        state.loading = false;
       },
     };
   }

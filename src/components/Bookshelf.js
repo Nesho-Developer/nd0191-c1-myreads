@@ -2,11 +2,10 @@ import { Fragment } from "react";
 import Book from "./Book";
 import classes from "./Bookshelf.module.css";
 
-const Bookshelf = ({ title, books }) => {
-  console.log(title, books);
+const Bookshelf = ({ title, books, mode }) => {
   const renderedBox = books.map((book) => (
     <li key={book.id}>
-      <Book book={book} />
+      <Book book={book} mode={mode} />
     </li>
   ));
   return (
@@ -17,9 +16,12 @@ const Bookshelf = ({ title, books }) => {
           <div className={classes["bookshelf-books"]}>
             <ol className={classes["books-grid"]}>
               {renderedBox}
-              {books.length == 0 && (
+              {books.length === 0 && (
                 <div>
-                  <p> there is no anyBooks in this shelf.</p>
+                  {title && <p> there is no anyBooks in this shelf.</p>}
+                  {!title && (
+                    <p> Search by title, author, or ISBN to view more books.</p>
+                  )}
                 </div>
               )}
             </ol>

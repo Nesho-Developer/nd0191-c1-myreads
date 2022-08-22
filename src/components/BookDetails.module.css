@@ -1,0 +1,53 @@
+.book {
+  width: 100%;
+}
+.book-title,
+.book-authors {
+  font-size: 0.8em;
+  cursor: pointer;
+}
+.book-title {
+  margin-top: 10px;
+}
+.book-top-content span {
+  font-size: medium;
+  font-weight: bold;
+  padding: 3px;
+}
+.book-authors {
+  color: #999;
+}
+
+.book-top {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+
+  margin: 10px;
+  display: flex;
+  align-items: flex-start;
+}
+.book-down {
+  padding: 10px;
+  font-size: 0.8em;
+}
+.book-down span {
+      font-size: medium;
+  font-weight: bold;
+  padding: 3px;
+}
+.book-top-content {
+  padding: 10px;
+  width: auto;
+  font-size: 0.8em;
+}
+
+/* book cover */
+
+.book-cover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: #eee;
+  cursor: pointer;
+  background-repeat: round;
+  background-size: cover;
+}
