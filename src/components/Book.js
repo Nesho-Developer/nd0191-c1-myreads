@@ -41,7 +41,7 @@ const Book = ({ book, mode }) => {
   }, []);
 
   const onBookClickedHandler = () => {
-    // navigate(`books/${book.id}`)
+    navigate(`/books/${book.id}`);
   };
   const style = {
     // Outputs `translate3d(x, y, 0)`
