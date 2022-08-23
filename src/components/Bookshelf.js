@@ -2,7 +2,8 @@ import { Fragment } from "react";
 import Book from "./Book";
 import classes from "./Bookshelf.module.css";
 
-const Bookshelf = ({ title, books, mode }) => {
+const Bookshelf = ({ title, books, mode, id }) => {
+
   const renderedBox = books.map((book) => (
     <li key={book.id}>
       <Book book={book} mode={mode} />

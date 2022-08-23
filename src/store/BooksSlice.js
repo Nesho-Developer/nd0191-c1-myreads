@@ -53,7 +53,7 @@ function createExtraReducers() {
     var { pending, fulfilled, rejected } = extraActions.getBooks;
     return {
       [pending]: (state) => {
-        state.loading = true;
+        state.loading = false;
       },
       [fulfilled]: (state, action) => {
         const books = action.payload;

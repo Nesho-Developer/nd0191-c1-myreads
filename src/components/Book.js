@@ -2,19 +2,22 @@ import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bookActions } from "../store/BooksSlice";
 import classes from "./Book.module.css";
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useDraggable } from "@dnd-kit/core";
+import { CSS } from "@dnd-kit/utilities";
 
 const Book = ({ book, mode }) => {
   let timer;
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: book.id,
+  });
   const [isChange, setBookChange] = useState(false);
   const [shelf, setShelf] = useState("none");
   const dispatch = useDispatch();
   const { readingBooks, wantBooks, finishedBooks, loading } = useSelector(
     (state) => state.books
   );
-  const navigate = useNavigate()
-
-
+  const navigate = useNavigate();
 
   const onChangeHandler = (event) => {
     const shelf = event.target.value;
@@ -38,11 +41,21 @@ const Book = ({ book, mode }) => {
   }, []);
 
   const onBookClickedHandler = () => {
-    navigate(`books/${book.id}`)
+    // navigate(`books/${book.id}`)
+  };
+  const style = {
+    // Outputs `translate3d(x, y, 0)`
+    transform: CSS.Translate.toString(transform),
   };
   return (
     <Fragment>
-      <div className={classes["book"]}>
+      <div
+        ref={setNodeRef}
+        style={style}
+        {...listeners}
+        {...attributes}
+        className={classes["book"]}
+      >
         <div className={classes["book-top"]}>
           {loading && isChange && <div className="lds-dual-ring" />}
           <div
