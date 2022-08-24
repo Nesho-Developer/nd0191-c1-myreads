@@ -56,7 +56,7 @@ const Book = ({ book, mode }) => {
           ></div>
           {!isChange && (
             <div className={classes["book-shelf-changer"]}>
-              <select
+              <select data-testid={book.id}
                 value={mode === "search" ? shelf : book?.shelf}
                 onChange={onChangeHandler}
               >
