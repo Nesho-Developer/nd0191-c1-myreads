@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bookActions } from "../store/BooksSlice";
 import classes from "./Book.module.css";
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Book = ({ book, mode }) => {
   let timer;
@@ -12,9 +12,7 @@ const Book = ({ book, mode }) => {
   const { readingBooks, wantBooks, finishedBooks, loading } = useSelector(
     (state) => state.books
   );
-  const navigate = useNavigate()
-
-
+  const navigate = useNavigate();
 
   const onChangeHandler = (event) => {
     const shelf = event.target.value;
@@ -38,7 +36,7 @@ const Book = ({ book, mode }) => {
   }, []);
 
   const onBookClickedHandler = () => {
-    navigate(`books/${book.id}`)
+    navigate(`books/${book.id}`);
   };
   return (
     <Fragment>
@@ -56,7 +54,8 @@ const Book = ({ book, mode }) => {
           ></div>
           {!isChange && (
             <div className={classes["book-shelf-changer"]}>
-              <select data-testid={book.id}
+              <select
+                data-testid={book.id}
                 value={mode === "search" ? shelf : book?.shelf}
                 onChange={onChangeHandler}
               >
@@ -66,7 +65,8 @@ const Book = ({ book, mode }) => {
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
                 <option value="read">Read</option>
-                {!book?.shelf && <option value="none">None</option>}
+                {/* {!book?.shelf && <option value="none">None</option>} */}
+                <option value="none">None</option>
               </select>
             </div>
           )}

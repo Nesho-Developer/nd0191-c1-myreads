@@ -13,6 +13,7 @@ beforeEach(() => {
   global.Headers = () => ({
     Authorization: "zjbuspe9",
   });
+  
 });
 
 afterEach(() => {
@@ -29,21 +30,41 @@ describe("test Home page", () => {
     expect(screen.getByRole("link").textContent).toEqual("Add a book");
   });
 
-  test("should able to change book's shelf", async () => {
+  test("should check the books shelf names", async () => {
     await act(async () => renderWithProviders(<Home />));
-    const selects = screen.getAllByRole("combobox");
     const options = screen.getAllByRole("option", {
       name: "Currently Reading",
     });
-    expect(selects).toBeTruthy;
-    // expect(selects).toContain("currentlyReading");
     expect(options).toHaveLength(3);
     expect(options[0].selected).toBe(true);
     expect(options[1].selected).toBe(true);
+    expect(options[2].selected).toBe(false);
+  });
+
+  test("should able to change book's shelf", async () => {
+    await act(async () => renderWithProviders(<Home />));
+    const selects = screen.getAllByRole("combobox");
+
+    expect(selects).toBeTruthy;
+    const options = screen.getAllByRole("option", {
+      name: "Currently Reading",
+    });
     expect(options[2].selected).toBe(false);
     await act(() =>
       fireEvent.change(selects[2], { target: { value: "currentlyReading" } })
     );
     expect(options[2].selected).toBe(true);
+  });
+
+  test("should books list be 2 after change first book's shelf to none", async () => {
+    await act(async () => renderWithProviders(<Home />));
+
+    const selects = screen.getAllByRole("combobox");
+    expect(selects[0]).toBeInTheDocument;
+
+    await act(async () =>
+      fireEvent.change(selects[0], { target: { value: "none" } })
+    );
+    expect(screen.getAllByRole("combobox").length).toBe(3);
   });
 });

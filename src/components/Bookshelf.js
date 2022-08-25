@@ -19,7 +19,9 @@ const Bookshelf = ({ title, books, mode }) => {
               {books.length === 0 && (
                 <div>
                   {title && (
-                    <p role="paragraph">there is no anyBooks in this shelf.</p>
+                    <p role="paragraph">
+                      there is no anyBooks in this shelf.
+                    </p>
                   )}
                   {!title && (
                     <p role="paragraph">
