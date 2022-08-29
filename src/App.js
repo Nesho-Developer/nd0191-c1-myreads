@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React from "react";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./layout/Layout";
@@ -9,8 +9,6 @@ const Search = React.lazy(() => import("./pages/Search"));
 const Books = React.lazy(() => import("./pages/Books"));
 const Details = React.lazy(() => import("./pages/Details"));
 function App() {
-  const [showSearchPage, setShowSearchpage] = useState(false);
-
   return (
     <div className="app">
       <React.Suspense fallback={<>...</>}>

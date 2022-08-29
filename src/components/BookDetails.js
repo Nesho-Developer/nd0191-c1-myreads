@@ -8,7 +8,7 @@ const BookDetails = ({ id }) => {
     get(id).then((data) => {
       setBook(data);
     });
-  }, []);
+  }, [id]);
   return (
     <Fragment>
       <div className={classes["book"]}>
