@@ -33,7 +33,7 @@ const Book = ({ book, mode }) => {
     return () => {
       clearTimeout(timer);
     };
-  }, []);
+  }, [readingBooks, wantBooks, finishedBooks, timer, book]);
 
   const onBookClickedHandler = () => {
     navigate(`books/${book.id}`);
