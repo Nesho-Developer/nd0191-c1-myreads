@@ -12,7 +12,7 @@ const SearchButton = (props) => {
   return (
     <Fragment>
       <div className={classes["open-search"]}>
-        <a href="#" onClick={onShowSearchHandler}>
+        <a href="/#" onClick={onShowSearchHandler}>
           Add a book
         </a>
       </div>
