@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import Book from "./Book";
 import classes from "./Bookshelf.module.css";
 
-const Bookshelf = ({ title, books, mode }) => {
+const Bookshelf = ({ title, books, mode, name}) => {
   const renderedBox = books.map((book) => (
     <li key={book.id}>
       <Book book={book} mode={mode} />
@@ -13,15 +13,13 @@ const Bookshelf = ({ title, books, mode }) => {
       <div className={classes["list-books-content"]}>
         <div className={classes["bookshelf"]}>
           {title && <h2 className={classes["bookshelf-title"]}>{title}</h2>}
-          <div className={classes["bookshelf-books"]}>
+          <div className={`${classes["bookshelf-books"]} ${name}`}>
             <ol className={classes["books-grid"]}>
               {renderedBox}
               {books.length === 0 && (
                 <div>
                   {title && (
-                    <p role="paragraph">
-                      there is no anyBooks in this shelf.
-                    </p>
+                    <p role="paragraph">there is no anyBooks in this shelf.</p>
                   )}
                   {!title && (
                     <p role="paragraph">
