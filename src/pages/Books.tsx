@@ -1,6 +1,6 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 
-const Books = (props) => {
+const Books: React.FC = () => {
   return (
     <Fragment>
       <p>books</p>

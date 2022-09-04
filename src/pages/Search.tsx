@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import SearchBar from "../components/SearchBar";
 import SearchResult from "../components/SearchResult";
-import { search } from "../pages/api/BooksAPI";
+import { search } from "./api/BooksAPI";
 
 const Search = () => {
   const [books, setBooks] = useState([]);
@@ -14,8 +14,7 @@ const Search = () => {
         return;
       }
       search(text).then((data) => {
-        if (data?.error) {
-        } else {
+        if (!data?.error) {
           setBooks(data);
         }
       });

@@ -1,8 +1,13 @@
 import { Fragment } from "react";
+import BookModel from "../model/Book";
 import Book from "./Book";
 import classes from "./Bookshelf.module.css";
 
-const Bookshelf = ({ title, books, mode }) => {
+const Bookshelf: React.FC<{
+  title?: string;
+  books: BookModel[];
+  mode: string;
+}> = ({ title, books, mode }) => {
   const renderedBox = books.map((book) => (
     <li key={book.id}>
       <Book book={book} mode={mode} />

@@ -2,21 +2,22 @@ import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bookActions } from "../store/BooksSlice";
 import classes from "./Book.module.css";
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import BookModel from "../model/Book";
+import { AppDispatch, RootState } from "../store";
 
-const Book = ({ book, mode }) => {
-  let timer;
+const Book: React.FC<{ book: BookModel; mode: string }> = ({ book, mode }) => {
+  let timer: NodeJS.Timeout;
   const [isChange, setBookChange] = useState(false);
   const [shelf, setShelf] = useState("none");
-  const dispatch = useDispatch();
+  HTMLSelectElement;
+  const dispatch = useDispatch<AppDispatch>();
   const { readingBooks, wantBooks, finishedBooks, loading } = useSelector(
-    (state) => state.books
+    (state: RootState) => state.books
   );
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-
-
-  const onChangeHandler = (event) => {
+  const onChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const shelf = event.target.value;
     setBookChange(true);
     dispatch(bookActions.updateBooks({ book, shelf }));
@@ -27,9 +28,12 @@ const Book = ({ book, mode }) => {
   };
 
   useEffect(() => {
-    const shelf = [...readingBooks, ...wantBooks, ...finishedBooks].find(
-      (b) => b.id === book.id
-    )?.shelf;
+    const books: BookModel[] = [
+      ...readingBooks,
+      ...wantBooks,
+      ...finishedBooks,
+    ];
+    const shelf = books.find((bo) => bo.id === book.id)?.shelf;
 
     setShelf(shelf ? shelf : "none");
     return () => {
@@ -38,7 +42,7 @@ const Book = ({ book, mode }) => {
   }, []);
 
   const onBookClickedHandler = () => {
-    navigate(`books/${book.id}`)
+    navigate(`books/${book.id}`);
   };
   return (
     <Fragment>

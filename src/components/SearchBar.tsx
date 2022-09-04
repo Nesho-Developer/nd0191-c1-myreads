@@ -2,7 +2,9 @@ import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./SearchBar.module.css";
 
-const SearchBar = (props) => {
+const SearchBar: React.FC<{
+  onSearchInputChange: React.ChangeEventHandler<HTMLInputElement>;
+}> = (props) => {
   const navigate = useNavigate();
 
   const onBackToHomeHandler = () => {

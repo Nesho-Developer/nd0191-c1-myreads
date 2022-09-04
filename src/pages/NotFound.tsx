@@ -1,6 +1,6 @@
 import { Fragment } from "react"
 
-const NotFound = (props) => {
+const NotFound = () => {
     return (
         <Fragment>
             <h3>Not Found Page.</h3>

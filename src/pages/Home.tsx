@@ -3,11 +3,12 @@ import SearchButton from "../components/SearchButton";
 import Bookshelf from "../components/Bookshelf";
 import { bookActions } from "../store/BooksSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../store";
 
-const Home = (props) => {
-  const booksDispatch = useDispatch();
+const Home = () => {
+  const booksDispatch = useDispatch<AppDispatch>();
   const { readingBooks, wantBooks, finishedBooks, loading } = useSelector(
-    (state) => state.books
+    (state: RootState) => state.books
   );
 
   useEffect(() => {

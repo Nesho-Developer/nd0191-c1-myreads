@@ -1,9 +1,10 @@
 import { Fragment, useState, useEffect } from "react";
+import Book from "../model/Book";
 import { get } from "../pages/api/BooksAPI";
 import classes from "./BookDetails.module.css";
 
-const BookDetails = ({ id }) => {
-  const [book, setBook] = useState();
+const BookDetails: React.FC<{ id: string }> = ({ id }) => {
+  const [book, setBook] = useState<Book>();
   useEffect(() => {
     get(id).then((data) => {
       setBook(data);

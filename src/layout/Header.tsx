@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { useLocation } from "react-router-dom";
 import classes from "./Header.module.css";
 
-const Header = (props) => {
+const Header = () => {
   const location = useLocation();
   return (
     <Fragment>

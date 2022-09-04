@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import classes from "./Layout.module.css";
 
-const Layout = (props) => {
+const Layout: React.FC<{ children?: React.ReactNode }> = (props) => {
   return (
     <Fragment>
       <Header />

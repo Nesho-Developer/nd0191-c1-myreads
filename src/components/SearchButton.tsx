@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./SearchButton.module.css";
 
-const SearchButton = (props) => {
+const SearchButton = () => {
   const navigate = useNavigate();
 
   const onShowSearchHandler = () => {
