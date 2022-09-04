@@ -3,11 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { bookActions } from "../store/BooksSlice";
 import classes from "./Book.module.css";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD:src/components/Book.tsx
 import BookModel from "../model/Book";
 import { AppDispatch, RootState } from "../store";
-=======
->>>>>>> testing:src/components/Book.js
 
 const Book: React.FC<{ book: BookModel; mode: string }> = ({ book, mode }) => {
   let timer: NodeJS.Timeout;

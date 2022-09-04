@@ -6,18 +6,19 @@ import { Provider } from "react-redux";
 import { bookReducer } from "../store/BooksSlice";
 import { MemoryRouter } from "react-router-dom";
 export function renderWithProviders(
-  ui,
+  ui: React.ReactElement,
   {
-    preloadedState = {},
     // Automatically create a store instance if no store was passed in
-    store = configureStore({ reducer: { books: bookReducer }, preloadedState }),
+    store = configureStore({
+      reducer: { books: bookReducer },
+    }),
     ...renderOptions
   } = {}
-) {
-  function Wrapper({ children }) {
+): any {
+  function Wrapper(props: any) {
     return (
       <MemoryRouter>
-        <Provider store={store}>{children}</Provider>
+        <Provider store={store}>{props.children}</Provider>
       </MemoryRouter>
     );
   }
