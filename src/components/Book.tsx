@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { bookActions } from "../store/BooksSlice";
 import classes from "./Book.module.css";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD:src/components/Book.tsx
 import BookModel from "../model/Book";
 import { AppDispatch, RootState } from "../store";
+=======
+>>>>>>> testing:src/components/Book.js
 
 const Book: React.FC<{ book: BookModel; mode: string }> = ({ book, mode }) => {
   let timer: NodeJS.Timeout;
@@ -61,6 +64,7 @@ const Book: React.FC<{ book: BookModel; mode: string }> = ({ book, mode }) => {
           {!isChange && (
             <div className={classes["book-shelf-changer"]}>
               <select
+                data-testid={book.id}
                 value={mode === "search" ? shelf : book?.shelf}
                 onChange={onChangeHandler}
               >
@@ -70,7 +74,8 @@ const Book: React.FC<{ book: BookModel; mode: string }> = ({ book, mode }) => {
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
                 <option value="read">Read</option>
-                {!book?.shelf && <option value="none">None</option>}
+                {/* {!book?.shelf && <option value="none">None</option>} */}
+                <option value="none">None</option>
               </select>
             </div>
           )}

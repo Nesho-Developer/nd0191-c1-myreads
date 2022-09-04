@@ -23,9 +23,15 @@ const Bookshelf: React.FC<{
               {renderedBox}
               {books.length === 0 && (
                 <div>
-                  {title && <p> there is no anyBooks in this shelf.</p>}
+                  {title && (
+                    <p role="paragraph">
+                      there is no anyBooks in this shelf.
+                    </p>
+                  )}
                   {!title && (
-                    <p> Search by title, author, or ISBN to view more books.</p>
+                    <p role="paragraph">
+                      Search by title, author, or ISBN to view more books.
+                    </p>
                   )}
                 </div>
               )}
