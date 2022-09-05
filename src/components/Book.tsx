@@ -5,7 +5,6 @@ import classes from "./Book.module.css";
 import { useNavigate } from "react-router-dom";
 import BookModel from "../model/Book";
 import { AppDispatch, RootState } from "../store";
-
 const Book: React.FC<{ book: BookModel; mode: string }> = ({ book, mode }) => {
   let timer: NodeJS.Timeout;
   const [isChange, setBookChange] = useState(false);
@@ -35,7 +34,7 @@ const Book: React.FC<{ book: BookModel; mode: string }> = ({ book, mode }) => {
     ];
     const shelf = books.find((bo) => bo.id === book.id)?.shelf;
 
-    setShelf(shelf ? shelf : "none");
+    setShelf(shelf ? shelf : book.shelf ? book.shelf : "none");
     return () => {
       clearTimeout(timer);
     };

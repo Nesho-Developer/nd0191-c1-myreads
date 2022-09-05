@@ -5,7 +5,7 @@ import {
   waitFor,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
-import mockFetch, { booksListResponse } from "./mocks/mockFetch";
+import mockFetch from "./mocks/mockFetch";
 import { act } from "react-dom/test-utils";
 
 beforeEach(() => {
@@ -27,8 +27,8 @@ describe("test <App/> Component", () => {
     // jest.setTimeout(5000);
     await waitForElementToBeRemoved(() => screen.queryByText(/Loading .../i));
     expect(screen.getAllByRole("heading")).toHaveLength(4);
-    expect(screen.getAllByRole("combobox")).toHaveLength(3);
+    expect(screen.getAllByRole("combobox")).toHaveLength(1);
 
-    expect(screen.getByRole("paragraph")).toBeInTheDocument;
+    expect(screen.getAllByRole("paragraph").length).toBe(2);
   });
 });

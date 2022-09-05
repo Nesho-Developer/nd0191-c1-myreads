@@ -36,6 +36,6 @@ describe("test Search Page", () => {
     fireEvent.click(inputFeild);
     fireEvent.change(inputFeild, { target: { value: "react" } });
     await waitForElementToBeRemoved(screen.getByRole("paragraph"));
-    expect(screen.getAllByRole("combobox")).toHaveLength(3);
+    expect(screen.getAllByRole("combobox")).toHaveLength(1);
   });
 });
