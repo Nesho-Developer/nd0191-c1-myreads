@@ -5,15 +5,43 @@ import {
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 import { renderWithProviders } from "../../utils/test-utils";
-import mockFetch from "../mocks/mockFetch";
+import mockFetch, { booksListResponse } from "../mocks/mockFetch";
 import { act } from "react-dom/test-utils";
 
 beforeEach(() => {
-  jest.spyOn(window, "fetch").mockImplementation(mockFetch);
-  // global.Headers = () => ({
-  //   Authorization: "zjbuspe9",
-  // });
-  
+  // jest.spyOn(window, "fetch").mockImplementation(
+  //   jest.fn(() =>
+  //     Promise.resolve({
+  //       json: async () => booksListResponse,
+  //     })
+  //   ) as jest.Mock
+  // );
+  // jest.spyOn(window, "fetch").mockImplementation(
+  //   jest.fn((url) => {
+  //     console.log("--------------llloo------------------------------=====");
+  //     switch (url) {
+  //       case "https://reactnd-books-api.udacity.com/books": {
+  //         return Promise.resolve({
+  //           json: async () => booksListResponse,
+  //         });
+  //       }
+  //       case "https://reactnd-books-api.udacity.com/search": {
+  //         return Promise.resolve({
+  //           json: async () => booksListResponse,
+  //         });
+  //       }
+  //       case "https://reactnd-books-api.udacity.com/FpifBAAAQBAJ": {
+  //         return Promise.resolve({
+  //           json: async () => booksListResponse,
+  //         });
+  //       }
+  //     }
+  //   }) as jest.Mock
+  // );
+  // jest
+  //   .spyOn(window, "fetch")
+  //   .mockImplementation(jest.fn((url) => mockFetch(url)) as jest.Mock);
+  jest.spyOn(window, "fetch").mockImplementation(mockFetch as jest.Mock);
 });
 
 afterEach(() => {
@@ -21,11 +49,9 @@ afterEach(() => {
 });
 describe("test Home page", () => {
   test("should render the Home page", async () => {
-    renderWithProviders(<Home />);
-    expect(screen.getByText(/loading .../i)).toBeInTheDocument;
-    await waitForElementToBeRemoved(() => screen.queryByText(/Loading .../i));
+    await act(() => renderWithProviders(<Home />));
     expect(screen.getAllByRole("heading")).toHaveLength(3);
-    expect(screen.getAllByRole("combobox")).toHaveLength(1);
+    expect(screen.getAllByRole("combobox")).toHaveLength(3);
     expect(screen.getAllByRole("link")).toHaveLength(1);
     expect(screen.getByRole("link").textContent).toEqual("Add a book");
   });
@@ -43,7 +69,7 @@ describe("test Home page", () => {
 
   test("should able to change book's shelf", async () => {
     await act(async () => renderWithProviders(<Home />));
-    const selects = screen.getAllByRole("combobox");
+    const selects = screen.findAllByRole("combobox");
 
     expect(selects).toBeTruthy;
     const options = screen.getAllByRole("option", {
@@ -58,8 +84,11 @@ describe("test Home page", () => {
 
   test("should books list be 2 after change first book's shelf to none", async () => {
     await act(async () => renderWithProviders(<Home />));
-
-    const selects = screen.getAllByRole("combobox");
+    // jest.setTimeout(4000);
+    // await waitForElementToBeRemoved(() => screen.queryByText(/Loading .../i));
+    const selects = (await screen.findAllByRole(
+      "combobox"
+    )) as HTMLSelectElement[];
     expect(selects[0]).toBeInTheDocument;
 
     // await act(async () =>

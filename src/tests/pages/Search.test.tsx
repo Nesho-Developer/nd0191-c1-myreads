@@ -7,14 +7,14 @@ import Search from "../../pages/Search";
 import { renderWithProviders } from "../../utils/test-utils";
 import mockFetch from "../mocks/mockFetch";
 beforeEach(() => {
-  jest.spyOn(window, "fetch").mockImplementation(mockFetch);
+  jest.spyOn(window, "fetch").mockImplementation(mockFetch as jest.Mock);
   // global.Headers = () => ({
   //   Authorization: "zjbuspe9",
   // });
 });
 
 afterEach(() => {
-  jest.restoreAllMocks();
+  // jest.restoreAllMocks();
 });
 describe("test Search Page", () => {
   test("should render The Search page", () => {
@@ -36,6 +36,6 @@ describe("test Search Page", () => {
     fireEvent.click(inputFeild);
     fireEvent.change(inputFeild, { target: { value: "react" } });
     await waitForElementToBeRemoved(screen.getByRole("paragraph"));
-    expect(screen.getAllByRole("combobox")).toHaveLength(1);
+    expect(screen.getAllByRole("combobox")).toHaveLength(3);
   });
 });

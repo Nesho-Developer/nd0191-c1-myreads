@@ -11,14 +11,14 @@ import { act } from "react-dom/test-utils";
 import Book from "../../components/Book";
 
 beforeEach(() => {
-  // jest.spyOn(window, "fetch").mockImplementation(mockFetch);
+  jest.spyOn(window, "fetch").mockImplementation(mockFetch as jest.Mock);
   // global.Headers = () => ({
   //   Authorization: "zjbuspe9",
   // });
 });
 
 afterEach(() => {
-  jest.restoreAllMocks();
+  // jest.restoreAllMocks();
 });
 
 describe("test Book Component", () => {

@@ -9,9 +9,9 @@ import { getAll, update } from "../pages/api/BooksAPI";
 
 // create slice
 interface InitialState {
-  readingBooks: [];
-  wantBooks: [];
-  finishedBooks: [];
+  readingBooks: Book[];
+  wantBooks: Book[];
+  finishedBooks: Book[];
   loading: boolean;
   error: string;
 }
@@ -73,11 +73,13 @@ function createExtraReducers() {
     return {
       [pending.toString()]: (state: InitialState) => {
         state.loading = true;
+        // console.log("status pending: ", state);
       },
       [fulfilled.toString()]: (
         state: InitialState,
         action: PayloadAction<any>
       ) => {
+        // console.log("status fulfilled: ", action, state);
         const books = action.payload;
         state.readingBooks = books.filter(
           (bo: Book) => bo.shelf === "currentlyReading"
@@ -85,13 +87,15 @@ function createExtraReducers() {
         state.wantBooks = books.filter((bo: Book) => bo.shelf === "wantToRead");
         state.finishedBooks = books.filter((bo: Book) => bo.shelf === "read");
         state.loading = false;
+        // console.log("status fulfilled state: ", state);
       },
       [rejected.toString()]: (
         state: InitialState,
         action: PayloadAction<any>
       ) => {
-        state.error = action.payload.error;
+        state.error = action.payload;
         state.loading = false;
+        // console.log("status reject: ", state);
       },
     };
   }
@@ -111,7 +115,9 @@ function createExtraReducers() {
         state: InitialState,
         action: PayloadAction<any>
       ) => {
-        state.error = action.payload.error;
+        // console.log(action.payload);
+
+        state.error = action.payload;
         state.loading = false;
       },
     };
