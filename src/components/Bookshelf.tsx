@@ -4,10 +4,11 @@ import Book from "./Book";
 import classes from "./Bookshelf.module.css";
 
 const Bookshelf: React.FC<{
+  name?: string;
   title?: string;
   books: BookModel[];
   mode: string;
-}> = ({ title, books, mode }) => {
+}> = ({ title, books, mode, name }) => {
   const renderedBox = books.map((book) => (
     <li key={book.id}>
       <Book book={book} mode={mode} />

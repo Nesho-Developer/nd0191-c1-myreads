@@ -15,7 +15,14 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node", "jest", "react", "react-dom", "@testing-library/jest-dom"]
+    "types": [
+      "node",
+      "jest",
+      "react",
+      "react-dom",
+      "@testing-library/jest-dom",
+      "cypress"
+    ]
   },
   "include": ["src"]
 }
