@@ -22,12 +22,23 @@ const Home = () => {
       {!loading && (
         <div className="list-books">
           <Bookshelf
+            name="currentReading"
             title="Currently Reading"
             mode="list"
             books={readingBooks}
           />
-          <Bookshelf title="Want to Read" mode="list" books={wantBooks} />
-          <Bookshelf title="Read" mode="list" books={finishedBooks} />
+          <Bookshelf
+            name="wantToRead"
+            title="Want to Read"
+            mode="list"
+            books={wantBooks}
+          />
+          <Bookshelf
+            name="read"
+            title="Read"
+            mode="list"
+            books={finishedBooks}
+          />
           <SearchButton />
         </div>
       )}

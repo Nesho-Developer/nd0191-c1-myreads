@@ -18,15 +18,13 @@ const Bookshelf: React.FC<{
       <div className={classes["list-books-content"]}>
         <div className={classes["bookshelf"]}>
           {title && <h2 className={classes["bookshelf-title"]}>{title}</h2>}
-          <div className={classes["bookshelf-books"]}>
+          <div className={`${classes["bookshelf-books"]} ${name}`}>
             <ol className={classes["books-grid"]}>
               {renderedBox}
               {books.length === 0 && (
                 <div>
                   {title && (
-                    <p role="paragraph">
-                      there is no anyBooks in this shelf.
-                    </p>
+                    <p role="paragraph">there is no anyBooks in this shelf.</p>
                   )}
                   {!title && (
                     <p role="paragraph">

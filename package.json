@@ -54,6 +54,7 @@
     "eslint": "^8.23.0",
     "eslint-plugin-react": "^7.31.5",
     "prettier": "2.7.1",
-    "react-select-event": "^5.5.1"
+    "react-select-event": "^5.5.1",
+    "cypress": "^10.6.0"
   }
 }
